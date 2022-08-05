@@ -40,35 +40,35 @@ def idFormat(idNum):
     return res
 
 def checkSize(language, pId):
-    return  len(open(ROOT+language+'/source/'+pId+"-tokens.tsv","r").readlines()) > 1
+    return  len(open(ROOT+language+'/source/'+pId+"-tokens.tsv","r").readlines()) > 2
 
-## create cluster dict 
-splitTmp    = None
-clusterTmp  = None
-clusterDic  = dict()
-with open(PROBLEM_CLUSTER,"r") as file:
-    for clusterLine in file.readlines():
-        clusterTmp = Cluster()
-        splitTmp = clusterLine[:-1].split(",")
-        for id in splitTmp:
-            clusterDic[id] = clusterTmp
-            clusterTmp.addProblemId(id)
-            
-for language in LANGUAGE_LIST:
-    outputFile = open("./" + language + "problemList.txt", "w")
-    for idNum in range(0, 4053):
-        id = "p" + idFormat(idNum)
-        if id in clusterDic:
-            if clusterDic[id].ifOver:
-                continue
+
+if __name__ == "__main__":
+    ## create cluster dict 
+    splitTmp    = None
+    clusterTmp  = None
+    clusterDic  = dict()
+    with open(PROBLEM_CLUSTER,"r") as file:
+        for clusterLine in file.readlines():
+            clusterTmp = Cluster()
+            splitTmp = clusterLine[:-1].split(",")
+            for id in splitTmp:
+                clusterDic[id] = clusterTmp
+                clusterTmp.addProblemId(id)
+                
+    for language in LANGUAGE_LIST:
+        outputFile = open("./" + language + "problemList.txt", "w")
+        for idNum in range(0, 4053):
+            id = "p" + idFormat(idNum)
+            if id in clusterDic:
+                if clusterDic[id].ifOver:
+                    continue
+                else:
+                    minId = getMinist(language, clusterDic[id].problemArr)
+                    if checkSize(language, minId):
+                        outputFile.write( minId + "\n")
+                        clusterDic[id].ifOver = True
             else:
-                minId = getMinist(language, clusterDic[id].problemArr)
-                if checkSize(language, minId):
-                    outputFile.write( minId + "\n")
-        else:
-            if checkSize(language, id):
-                outputFile.write(id + "\n")
-    outputFile.close()
-    
-       
-    
+                if checkSize(language, id):
+                    outputFile.write(id + "\n")
+        outputFile.close()  
