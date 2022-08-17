@@ -6,16 +6,17 @@ time_start = time.time()
 rootPath = "./"
 extName  = ".tsv"
 language = "Java"
-#pIdListFile = "./problemList/" + language + "problemList.txt"
-pIdListFile = "./problemList/" + language + "_notFinished.txt"
+pIdListFile = "./problemList/" + language + "problemList.txt"
+# pIdListFile = "./problemList/" + language + "_notFinished.txt"
 threadNum = 180
+keywordsList = "./keywordsList/" + language + ".reserved"
 
 for pIdLine in open(pIdListFile,"r").readlines():
     fileURL    = language + "/source/" + pIdLine[:-1] + "-tokens.tsv"
     outputFile = language + "/result/" + pIdLine[:-1] + "-simi.csv"
     outputlog  = language + "/result/" + pIdLine[:-1] + "-simi.log"  
     print("Opertaing: " + fileURL)
-    os.system("java -jar codenetSimi_editDisOnly.jar " + fileURL + " " + str(threadNum) + " " + outputFile + " > " + outputlog)
+    os.system("java -jar codenetSimi_normalized.jar " + fileURL + " " + str(threadNum) + " " + outputFile + " " + keywordsList + " > " + outputlog)
     print("Over")
 
 time_end = time.time()  
