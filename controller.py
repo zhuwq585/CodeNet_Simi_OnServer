@@ -16,7 +16,7 @@ for pIdLine in open(pIdListFile,"r").readlines():
     outputFile = language + "/result/" + pIdLine[:-1] + "-simi.csv"
     outputlog  = language + "/result/" + pIdLine[:-1] + "-simi.log"  
     print("Opertaing: " + fileURL)
-    os.system("java -jar codenetSimi_normalized.jar " + fileURL + " " + str(threadNum) + " " + outputFile + " " + keywordsList + " > " + outputlog)
+    os.system("java -jar codenetSimi_editDisOnly_faster.jar " + fileURL + " " + str(threadNum) + " " + outputFile + " " + keywordsList + " > " + outputlog)
     print("Over")
 
 time_end = time.time()  
