@@ -5,10 +5,10 @@ from xml.etree.ElementTree import PI
 time_start = time.time()
 rootPath = "./"
 extName  = ".tsv"
-language = "Java"
-pIdListFile = "./problemList/" + language + "problemList.txt"
+language = "C++"
+pIdListFile = "./problemList/" + language + "problemList(selected).txt"
 # pIdListFile = "./problemList/" + language + "_notFinished.txt"
-threadNum = 180
+threadNum = 25
 keywordsList = "./keywordsList/" + language + ".reserved"
 
 for pIdLine in open(pIdListFile,"r").readlines():
