@@ -8,7 +8,7 @@ extName  = ".tsv"
 language = "C++"
 pIdListFile = "./problemList/" + language + "problemList(selected).txt"
 # pIdListFile = "./problemList/" + language + "_notFinished.txt"
-threadNum = 25
+threadNum = 24
 keywordsList = "./keywordsList/" + language + ".reserved"
 
 for pIdLine in open(pIdListFile,"r").readlines():
